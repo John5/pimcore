@@ -37,6 +37,16 @@ If `password_hash` is selected as algorithm, Pimcore checks with `password_get_i
 hashed - and does so if not. 
 
 We recommend using `password_hash` as algorithm.
+
+To verify if a password entered by a user matches the one on record you can use the verifyPassword() method of the password editable as follows, which will return a boolean; TRUE if the password matches and FALSE when it does not match:
+
+```
+/* @var Pimcore\Model\Object\ClassDefinition\Data\Password $passwordField */
+$passwordField = $customer->getClass()->getFieldDefinition('password');
+
+// verify password against value stored in object, optionally take care of updating the hash if it is outdated
+$result = $passwordField->verifyPassword($password, $customer, true);
+```
  
 
 ![Password Configuration](../../../img/classes-datatypes-text4.jpg)
